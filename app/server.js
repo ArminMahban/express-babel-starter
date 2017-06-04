@@ -53,6 +53,10 @@ controller.hears(['help'], ['message_received', 'direct_message'], (bot, message
   bot.reply(message, 'Hi! I\'m a food bot! \n I can recommend places to eat nearby!');
 });
 
+controller.on('outgoing_webhook', (bot, message) => {
+  bot.replyPublic(message, 'yeah yeah');
+});
+
 controller.hears(['hungry', 'dinner', 'food'], ['message_received', 'direct_message'], (bot, message) => {
   const askFlavor = function (err, convo) {
     convo.ask('What kind of food would you like? (ex: \'sushi\' or \'Italian\')', (response, convo) => {

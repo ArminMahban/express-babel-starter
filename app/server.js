@@ -49,7 +49,7 @@ controller.on('direct_message', (bot, message) => {
   }
 });
 
-controller.hears(['help'], ['message_received', 'direct_message', 'mention'], (bot, message) => {
+controller.hears(['help'], ['message_received', 'direct_message', 'direct_mention'], (bot, message) => {
   bot.reply(message, 'Hi! I\'m a food bot! \n I can recommend places to eat nearby!');
 });
 
@@ -57,7 +57,7 @@ controller.on('outgoing_webhook', (bot, message) => {
   bot.replyPublic(message, 'yeah yeah');
 });
 
-controller.hears(['hungry', 'dinner', 'food'], ['message_received', 'direct_message'], (bot, message) => {
+controller.hears(['hungry', 'dinner', 'food'], ['message_received', 'direct_message', 'direct_mention'], (bot, message) => {
   const askFlavor = function (err, convo) {
     convo.ask('What kind of food would you like? (ex: \'sushi\' or \'Italian\')', (response, convo) => {
       askSize(response, convo);
@@ -93,7 +93,7 @@ controller.hears(['hungry', 'dinner', 'food'], ['message_received', 'direct_mess
   bot.startConversation(message, askFlavor);
 });
 
-controller.hears('directions', ['message_received', 'direct_message'], (bot, message) => {
+controller.hears('directions', ['message_received', 'direct_message', 'direct_mention'], (bot, message) => {
   console.log(dest);
   bot.createConversation(message, (err, convo) => {
     convo.ask('What\'s your starting address?', (response, convo) => {
